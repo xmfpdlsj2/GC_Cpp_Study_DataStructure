@@ -6,6 +6,7 @@
 void VectorPractice();
 void InputStage(std::vector<Student>& vec);
 void AddStudent(std::vector<Student>& vec);
+void DeleteStudent(std::vector<Student>& vec);
 
 
 int main()
@@ -57,6 +58,7 @@ void InputStage(std::vector<Student>& vec)
 				break;
 
 			case 2:
+				DeleteStudent(vec);
 				break;
 
 			case 3:
@@ -120,4 +122,26 @@ void AddStudent(std::vector<Student>& vec)
 	
 	vec.push_back(Student{ number, name, score });
 	std::cout << "학생이 추가되었습니다." << std::endl;
+}
+
+void DeleteStudent(std::vector<Student>& vec)
+{
+	int number{};
+	std::cout << "제거할 학생 번호: ";
+	if (!(std::cin >> number))
+	{
+		std::cout << "잘못 입력했습니다!" << std::endl;
+		return;
+	}
+
+	for (std::vector<Student>::iterator itr = vec.begin(); itr != vec.end(); ++itr)
+	{
+		if ((*itr).GetNumber() == number)
+		{
+			vec.erase(itr);
+			std::cout << number << "번 학생을 제거했습니다." << std::endl;
+			return;
+		}
+	}
+	std::cout << "없는 번호 입니다!" << std::endl;
 }
