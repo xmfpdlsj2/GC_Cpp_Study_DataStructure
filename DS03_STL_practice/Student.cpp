@@ -19,3 +19,8 @@ const int& Student::GetNumber() const
 {
 	return mNumber;
 }
+
+const int& Student::GetScore() const
+{
+	return mScore;
+}

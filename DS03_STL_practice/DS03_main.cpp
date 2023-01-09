@@ -1,12 +1,17 @@
 ﻿
 #include <iostream>
 #include <vector>
+#include <numeric>
+#include <algorithm>
 #include "Student.h"
 
 void VectorPractice();
 void InputStage(std::vector<Student>& vec);
 void AddStudent(std::vector<Student>& vec);
 void DeleteStudent(std::vector<Student>& vec);
+void PrintAverageNScore(std::vector<Student>& vec);
+void PrintUpperAverage(std::vector<Student>& vec);
+
 
 
 int main()
@@ -31,6 +36,7 @@ void VectorPractice()
 	vec.push_back(Student{ 2, "Lee", 20 });
 	vec.push_back(Student{ 3, "Park", 50 });
 	vec.push_back(Student{ 4, "Choi", 30 });
+
 
 	for (auto& student : vec)
 	{
@@ -69,15 +75,17 @@ void InputStage(std::vector<Student>& vec)
 				break;
 
 			case 4:
+				PrintAverageNScore(vec);
 				break;
 
 			case 5:
+				PrintUpperAverage(vec);
 				break;
 
 			case 6:
-				break;
-
+				return;
 			default:
+				return;
 				break;
 		}
 		std::cout << "\n명령 ->> ";
@@ -119,6 +127,11 @@ void AddStudent(std::vector<Student>& vec)
 			return;
 		}
 	}
+	//// 알고리즘 사용버전	
+	//auto itr = std::find_if(vec.begin(), vec.end(), [&](auto& elem) -> bool
+	//	{
+	//		return elem.GetNumber() == number;
+	//	});
 	
 	vec.push_back(Student{ number, name, score });
 	std::cout << "학생이 추가되었습니다." << std::endl;
@@ -143,5 +156,54 @@ void DeleteStudent(std::vector<Student>& vec)
 			return;
 		}
 	}
+	//// 알고리즘 사용버전	
+	//vec.erase(std::remove_if(vec.begin(), vec.end(), [&](auto& elem) -> bool
+	//	{
+	//		return elem.GetNumber() == number;
+	//	}));
+
 	std::cout << "없는 번호 입니다!" << std::endl;
+}
+
+void PrintAverageNScore(std::vector<Student>& vec)
+{
+	int total{};
+	for (auto& student : vec)
+	{
+		total += student.GetScore();
+	}
+	//// 알고리즘 사용버전
+	//total = std::accumulate(vec.begin(), vec.end(), 0, [](int accum, auto& elem) -> int
+	//	{
+	//		return accum += elem.GetScore();
+	//	});
+
+	std::cout << "평균: " << (static_cast<float>(total) / vec.size()) <<
+		" 총점: " << total << std::endl;
+}
+
+void PrintUpperAverage(std::vector<Student>& vec)
+{
+	int total{};
+	for (auto& student : vec)
+	{
+		total += student.GetScore();
+	}
+	float average{ (static_cast<float>(total) / vec.size()) };
+
+	for (auto& student : vec)
+	{
+		if (student.GetScore() >= average)
+		{
+			student.Print();
+		}
+	}
+	//// 알고리즘 사용버전
+	//std::for_each(vec.begin(), vec.end(), [&](Student& elem)
+	//	{
+	//		if (elem.GetScore() >= average)
+	//		{
+	//			elem.Print();
+	//		}
+	//	});
 }

@@ -13,5 +13,6 @@ public:
 	~Student();
 	void Print() const;
 	const int& GetNumber() const;
+	const int& GetScore() const;
 };
 
