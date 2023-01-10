@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="DS03_main.cpp" />
     <ClCompile Include="Student.cpp" />
+    <ClCompile Include="VectorPractice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student.h" />
