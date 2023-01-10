@@ -1,12 +1,11 @@
-﻿
-void VectorPractice();
-
+﻿#include "Student.h"
 
 
 
 int main()
 {
-	VectorPractice();
+	//VectorPrac::VectorPractice();
+	MapPrac::MapPractice();
 }
 
 

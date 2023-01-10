@@ -1,26 +1,50 @@
 #include "Student.h"
 
-Student::Student(int number, std::string name, int score)
-	: mNumber{ number }, mName{ name }, mScore{ score }
-{
-}
+using namespace VectorPrac;
+//{
+	Student::Student(int number, std::string name, int score)
+		: mNumber{ number }, mName{ name }, mScore{ score }
+	{
+	}
 
-Student::~Student()
-{
-}
+	Student::~Student()
+	{
+	}
 
-void Student::Print() const 
-{
-	std::cout << "(" << mNumber << ") " <<
-		mName << " : " << mScore << std::endl;
-}
+	void Student::Print() const 
+	{
+		std::cout << "(" << mNumber << ") " <<
+			mName << " : " << mScore << std::endl;
+	}
 
-const int& Student::GetNumber() const
-{
-	return mNumber;
-}
+	const int& Student::GetNumber() const
+	{
+		return mNumber;
+	}
 
-const int& Student::GetScore() const
+	const int& Student::GetScore() const
+	{
+		return mScore;
+	}
+//}
+namespace MapPrac
 {
-	return mScore;
+	Student::Student(std::string name, int score)
+		:mName{ name }, mScore{ score }
+	{
+	}
+
+	Student::~Student()
+	{
+	}
+
+	void Student::Print() const
+	{
+		std::cout << mName << " : " << mScore << std::endl;
+	}
+
+	const int& Student::GetScore() const
+	{
+		return mScore;
+	}
 }
