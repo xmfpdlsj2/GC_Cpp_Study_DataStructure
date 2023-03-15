@@ -19,7 +19,7 @@ namespace MyTree
 		}
 		if (!IsInBound(node->pos))
 		{
-			return;
+			return;		
 		}
 		if (std::abs(topLeft.x - bottomRight.x) <= 1 &&
 			std::abs(topLeft.y - bottomRight.y) <= 1)
@@ -38,7 +38,7 @@ namespace MyTree
 				if (!nw)
 				{
 					nw = std::make_unique<QuadTree>(
-						Point(topLeft.x, topLeft.y),
+						Point(topLeft.x, topLeft.y), 
 						Point((topLeft.x + bottomRight.x) / 2,
 							(topLeft.y + bottomRight.y) / 2)
 						);
