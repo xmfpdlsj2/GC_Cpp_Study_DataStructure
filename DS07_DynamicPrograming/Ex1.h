@@ -2,6 +2,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <list>
+
 
 // 피보나치
 // Time Complexity O(2^n)
@@ -35,11 +37,11 @@ int64_t FibonacciOPT(int n, std::map<int, int64_t>& history)
 
 
 
-// Time Complexity O(2^(m+n))
-// Space Complexity O(m+n)
 // Find Path
 // m x n의 영역에서 좌상단->우하단으로 이동하는 모든 경우의수
 // 이동은 오른쪽이나 아래쪽으로만 갈수 있습니다.
+// Time Complexity O(2^(m+n))
+// Space Complexity O(m+n)
 int FindPath(int m, int n)
 {
 	if (m == 0 || n == 0)
@@ -147,9 +149,9 @@ bool CanAccumulateOPT(int sum, const std::vector<int>& nums,
 // ex)
 // CanAccumulate(8, {2, 3, 5});
 // 출력 : { 2,2,2,2 } or {3,5} or {2,3,3};
-// 만들수 없을때 출력 : {}
-// Time Complexity : sum - m, 배열의 크기가 n이면 O( )
-// Space Complexity : O( )
+// 만들수 없을때 출력 : nullptr, 입력이 0이면 출력은 {}
+// Time Complexity : sum - m, 배열의 크기가 n이면 O()
+// Space Complexity : O()
 std::shared_ptr<std::vector<int>> HowAccumulate(int sum, const std::vector<int>& nums)
 {
 	if (sum == 0)
@@ -173,7 +175,7 @@ std::shared_ptr<std::vector<int>> HowAccumulate(int sum, const std::vector<int>&
 	return nullptr;
 }
 // Time Complexity : sum - m, 배열의 크기가 n이면 O(m*n)
-// Space Complexity : O(m^2)
+// Space Complexity : O(m^2 * n)
 std::shared_ptr<std::vector<int>> HowAccumulateOPT(int sum, const std::vector<int>& nums,
 std::map<int, std::shared_ptr<std::vector<int>>>& h)
 {
@@ -195,6 +197,7 @@ std::map<int, std::shared_ptr<std::vector<int>>>& h)
 		auto ret = HowAccumulateOPT(sum - e, nums, h);
 		if (ret)
 		{
+			// 여기 복사 생성자 이슈 있음
 			ret->push_back(e);
 			h[sum] = ret;
 			return h[sum];
@@ -293,8 +296,8 @@ bool CanStringGenerate(std::string target, const std::vector<std::string>& list,
 }
 
 // 주어진 문자열의 집합 stringList에서 target 문자열을 만들 수 있는 모든 경우의 수 반환
-// Time Complexity :  
-// Space Complexity :
+// Time Complexity : O(m^2 * n) 
+// Space Complexity : 동일
 int CombStringGenerate(std::string target, const std::vector<std::string>& list,
 	std::map<std::string, int>& h)
 {
@@ -318,5 +321,70 @@ int CombStringGenerate(std::string target, const std::vector<std::string>& list,
 		}
 	}
 	h[target] = ret;
+	return h[target];
+}
+
+// 주어진 문자열의 집합 stringList에서 target 문자열을 만들 수 있는 모든 경우의 수를 배열로
+// Time Complexity : O(n^m * m)
+// Space Complexity : O(m^2 + m * n) -> O(m^2)
+std::list<std::list<std::string>> ListStringGenerate(
+	std::string target, const std::vector<std::string>& list)
+{
+	if (target.length() <= 0)
+	{
+		return std::list<std::list<std::string>>{ {} };
+	}
+
+	std::list<std::list<std::string>> retList{};
+	for (auto& e : list)
+	{
+		if (target.find(e) == 0)
+		{
+			auto sub = target.substr(e.length());
+			auto ret = ListStringGenerate(sub, list);
+
+			for (auto e2 : ret)
+			{
+				e2.push_front(e);
+				retList.push_front(e2); // 이건 순서 상관없음
+			}
+		}
+	}
+	return retList;
+}
+// 최적화 버전
+// Time Complexity : O(n^m)
+// Space Complexity :O(m^2 + m * n) -> O(m^2)
+std::list<std::list<std::string>> ListStringGenerateOPT(
+	std::string target, const std::vector<std::string>& list,
+	std::map<std::string, std::list<std::list<std::string>>> h)
+{
+	if (h.count(target)== 1)
+	{
+		return h[target];
+	}
+
+	if (target.length() <= 0)
+	{
+		return std::list<std::list<std::string>>{ {} };
+	}
+
+	std::list<std::list<std::string>> retList{};
+	for (auto& e : list)
+	{
+		if (target.find(e) == 0)
+		{
+			auto sub = target.substr(e.length());
+			auto ret = ListStringGenerateOPT(sub, list, h);
+
+			for (auto e2 : ret)
+			{
+				e2.push_front(e);
+				retList.push_front(e2); // 이건 순서 상관없음
+			}
+		}
+	}
+
+	h[target] = retList;
 	return h[target];
 }
