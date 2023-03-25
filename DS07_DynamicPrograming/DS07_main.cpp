@@ -78,7 +78,10 @@ void DynamicProgramming02()
 
 	//std::cout << CanAccumulate02(12, { 3,5 }) << std::endl;
 	//Print(HowAccumulate02(12, { 3,5 }));
-	Print(MinAccumulate02(8, { 2,3,5 }));
+	//Print(MinAccumulate02(8, { 2,3,5 }));
+
+	//std::cout << CanStringGenerate02("abcdef" ,{"ab", "abc", "cd", "def", "abcd"});
+	std::cout << CombStringGenerate02("hello" ,{"h", "he", "llo", "hell", "o", "lo", "hel", "e"});
 }
 int main()
 {
