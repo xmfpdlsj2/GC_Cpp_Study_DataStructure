@@ -61,13 +61,13 @@ void DynamicProgramming01()
 	//std::cout << CanStringGenerate("abcf", { "ab", "abc", "cd", "def", "abcd" }, h) << std::endl;
 	//std::map<std::string, int> h;
 	//std::cout << CombStringGenerate("abcdef", { "ab", "abc", "cd", "def", "cdef" }, h) << std::endl;
-		auto ls = ListStringGenerate("hello", { "h", "e", "he", "llo", "hell" });
-		Print(ls);
+	auto ls = ListStringGenerate("hello", { "h", "e", "he", "llo", "hell" });
+	Print(ls);
 
-		std::map<std::string, std::list<std::list<std::string>>> h{};
-		h.clear();
-		auto lsOPT = ListStringGenerateOPT("hello", { "h", "e", "he", "llo", "hell" }, h);
-		Print(lsOPT);
+	std::map<std::string, std::list<std::list<std::string>>> h{};
+	h.clear();
+	auto lsOPT = ListStringGenerateOPT("hello", { "h", "e", "he", "llo", "hell" }, h);
+	Print(lsOPT);
 }
 
 void DynamicProgramming02()
@@ -81,7 +81,12 @@ void DynamicProgramming02()
 	//Print(MinAccumulate02(8, { 2,3,5 }));
 
 	//std::cout << CanStringGenerate02("abcdef" ,{"ab", "abc", "cd", "def", "abcd"});
-	std::cout << CombStringGenerate02("hello" ,{"h", "he", "llo", "hell", "o", "lo", "hel", "e"});
+	//std::cout << CombStringGenerate02("hello" ,{"h", "he", "llo", "hell", "o", "lo", "hel", "e"});
+	auto a = ListStringGenerate02("abcdef", { "ab", "abc", "cd", "def", "abcd" });
+	//auto b = ListStringGenerate02("hello", { "he", "h", "e", "llo", "hell" });
+	//auto b = ListStringGenerate02("hello", { "he", "b", "c", "d" });
+	Print(a);
+	//Print(b);
 }
 int main()
 {

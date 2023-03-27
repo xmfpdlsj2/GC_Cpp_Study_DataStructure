@@ -224,8 +224,31 @@ int CombStringGenerate02(std::string target, const std::vector<std::string>& lis
 	return table[target.size()];
 }
 // 주어진 문자열의 집합 stringList에서 target 문자열을 만들 수 있는 모든 경우의 수를 배열로
-std::list<std::list<std::string>> ListStringGenerate(
+std::list<std::list<std::string>> ListStringGenerate02(
 	std::string target, const std::vector<std::string>& list)
 {
-	std::vector<std::list<std::string>> table(target.size() + 1, std::list<std::string>());
+	std::vector<std::list<std::list<std::string>>> table(target.size() + 1);
+	table[0] = { {} };
+	for (size_t i = 0; i <= target.size(); i++)
+	{
+		if (table[i].size() > 0)
+		{
+			for (auto& e : list)
+			{
+				if (target.substr(i, e.length()) == e)
+				{
+					for (auto e2 : table[i])
+					{
+						if (i + e.length() <= target.length())
+						{
+							e2.push_back(e);
+							table[i + e.length()].push_back(e2);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return table[target.size()];
 }
