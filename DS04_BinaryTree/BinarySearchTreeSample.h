@@ -15,12 +15,12 @@ namespace MyTree
 			mRight = right;
 		}
 	};
-	class BinarySearchTree
+	class BinarySearchTreeSample
 	{
 		Node* mpRoot;
 
 	public:
-		BinarySearchTree();
+		BinarySearchTreeSample();
 		Node* GetRoot();
 		Node* CreateNode(int data);
 		Node* Insert(Node* pParent, int data);

@@ -1,22 +1,22 @@
-#include "BinarySearchTree.h"
+#include "BinarySearchTreeSample.h"
 #include <iostream>	
 
 namespace MyTree
 {
-	BinarySearchTree::BinarySearchTree()
+	BinarySearchTreeSample::BinarySearchTreeSample()
 	{
 		mpRoot = CreateNode(0);
 	}
-	Node* BinarySearchTree::GetRoot()
+	Node* BinarySearchTreeSample::GetRoot()
 	{
 		return mpRoot;
 	}
-	Node* BinarySearchTree::CreateNode(int data)
+	Node* BinarySearchTreeSample::CreateNode(int data)
 	{
 		return new Node{data, nullptr, nullptr};
 	}
 	// TimeComplex(O(logn))
-	Node* BinarySearchTree::Insert(Node* pParent, int data)
+	Node* BinarySearchTreeSample::Insert(Node* pParent, int data)
 	{
 		if (pParent == nullptr)
 		{
@@ -33,11 +33,11 @@ namespace MyTree
 		}
 		return pParent;
 	}
-	void BinarySearchTree::Visit(Node* pNode)
+	void BinarySearchTreeSample::Visit(Node* pNode)
 	{
 		std::cout << pNode->mData << "-";
 	}
-	void BinarySearchTree::InOrder(Node* pNode)
+	void BinarySearchTreeSample::InOrder(Node* pNode)
 	{
 		if (!pNode)
 		{

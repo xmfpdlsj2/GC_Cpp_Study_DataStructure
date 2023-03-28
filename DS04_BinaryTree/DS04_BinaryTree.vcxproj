@@ -127,13 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BinarySearchTree.cpp" />
-    <ClCompile Include="binarytree.cpp" />
+    <ClCompile Include="BinarySearchTreeSample.cpp" />
+    <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="BinarytreeSample.cpp" />
     <ClCompile Include="DS04_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinarySearchTree.h" />
-    <ClInclude Include="binarytree.h" />
+    <ClInclude Include="BinarySearchTreeSample.h" />
+    <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="BinarytreeSample.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

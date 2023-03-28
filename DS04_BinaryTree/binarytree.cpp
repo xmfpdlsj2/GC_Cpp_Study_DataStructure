@@ -1,121 +1,100 @@
-#include <queue>
-#include <stack>
-#include "binarytree.h"
+#include "BinaryTree.h"
 
-namespace MyTree
+namespace BT
 {
-	BinaryTree::BinaryTree()
+	BT::BinaryTree::BinaryTree(int val)
 	{
-		mpRoot = CreateNode(0);
+		mpRoot = CreateNode(val);
+		mInsertNQ.push(mpRoot);
 	}
-	BinaryTree::~BinaryTree()
-	{
-	}
-	Node* BinaryTree::CreateNode(int data)
-	{
-		return new Node{data, nullptr, nullptr};
-	}
-	Node* BinaryTree::InsertLeft(Node* parent, int data)
-	{
-		parent->mLeft = CreateNode(data);
-		return parent->mLeft;
-	}
-	Node* BinaryTree::InsertRight(Node* parent, int data)
-	{
-		parent->mRight = CreateNode(data);
-		return parent->mRight;
-	}
-	// TimeComplex O(n)
-	// SpaceComplex O(n)
-	void BinaryTree::BreadthFirst()
-	{
-		std::queue<Node*> q;
-		q.push(mpRoot);
 
-		while (!q.empty())
+	BT::BinaryTree::~BinaryTree()
+	{
+		DeleteAll();
+	}
+
+	Node* BT::BinaryTree::GetRoot() const
+	{
+		return mpRoot;
+	}
+
+	void BinaryTree::DeleteAll()
+	{
+
+	}
+
+	void BT::BinaryTree::Insert(int val)
+	{
+		Node* root{ nullptr };
+
+		while (true)
 		{
-			auto node = q.front();
-			Visit(node);
-			q.pop();
-
-			if (node->mLeft != nullptr)
+			root = mInsertNQ.front();
+			if (!root)
 			{
-				q.push(node->mLeft);
+				break;
 			}
-			if (node->mRight != nullptr)
+			if (root->left && root->right)
 			{
-				q.push(node->mRight);
+				mInsertNQ.pop();
+			}
+			else if (!root->left)
+			{
+				root->left = CreateNode(val);
+				mInsertNQ.push(root->left);
+				break;
+			}
+			else
+			{
+				root->right = CreateNode(val);
+				mInsertNQ.push(root->right);
+				break;
 			}
 		}
 	}
-	// TimeComplex O(n)
-	// SpaceComplex O(n)
-	void BinaryTree::DepthFirst()
-	{
-		std::stack<Node*> s;
-		s.push(mpRoot);
 
-		while (!s.empty())
-		{
-			auto node = s.top();
-			Visit(node);
-			s.pop();
-
-			if (node->mRight)
-			{
-				s.push(node->mRight);
-			}
-			if (node->mLeft)
-			{
-				s.push(node->mLeft);
-			}
-		}
-	}
-	// TimeComplex O(n)
-	// SpaceComplex O(n)
-	void BinaryTree::DepthFirstRecursive(Node* pRoot)
-	{
-		if (pRoot == nullptr)
-		{
-			return;
-		}
-
-		Visit(pRoot);
-		DepthFirstRecursive(pRoot->mLeft);
-		DepthFirstRecursive(pRoot->mRight);
-		return;
-	}
 	void BinaryTree::PreOrder(Node* pNode)
 	{
 		if (!pNode)
 		{
 			return;
 		}
-
 		Visit(pNode);
-		PreOrder(pNode->mLeft);
-		PreOrder(pNode->mRight);
+		PreOrder(pNode->left);
+		PreOrder(pNode->right);
 	}
+
 	void BinaryTree::InOrder(Node* pNode)
 	{
 		if (!pNode)
 		{
 			return;
 		}
-
-		InOrder(pNode->mLeft);
+		InOrder(pNode->left);
 		Visit(pNode);
-		InOrder(pNode->mRight);
+		InOrder(pNode->right);
 	}
+
 	void BinaryTree::PostOrder(Node* pNode)
 	{
 		if (!pNode)
 		{
 			return;
 		}
-
-		PostOrder(pNode->mLeft);
-		PostOrder(pNode->mRight);
+		PostOrder(pNode->left);
+		PostOrder(pNode->right);
 		Visit(pNode);
 	}
+
+	Node* BT::BinaryTree::CreateNode(int val)
+	{
+		return new Node{ val };
+	}
+
+	void BT::BinaryTree::Visit(Node* node) const
+	{
+		std::cout << node->val << "-";
+	}
+
+
 }
