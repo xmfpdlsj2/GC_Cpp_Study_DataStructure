@@ -28,7 +28,7 @@ namespace BT
 		~BinaryTree();
 
 		Node* GetRoot() const;
-		void DeleteAll();
+		void DeleteAll(Node* pNode);
 
 		virtual void Insert(int val);
 

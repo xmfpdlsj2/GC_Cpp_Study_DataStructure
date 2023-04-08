@@ -10,7 +10,7 @@ namespace BT
 
 	BT::BinaryTree::~BinaryTree()
 	{
-		DeleteAll();
+		DeleteAll(mpRoot);
 	}
 
 	Node* BT::BinaryTree::GetRoot() const
@@ -18,9 +18,15 @@ namespace BT
 		return mpRoot;
 	}
 
-	void BinaryTree::DeleteAll()
+	void BinaryTree::DeleteAll(Node* pNode)
 	{
-
+		if (!pNode)
+		{
+			return;
+		}
+		InOrder(pNode->left);
+		InOrder(pNode->right);
+		delete pNode;
 	}
 
 	void BT::BinaryTree::Insert(int val)
