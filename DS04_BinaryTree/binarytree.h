@@ -35,6 +35,8 @@ namespace BT
 		void PreOrder(Node* pNode);
 		void InOrder(Node* pNode);
 		void PostOrder(Node* pNode);
+
+		int GetSum(Node* pNode);
 	
 	protected:
 		Node* CreateNode(int val);
