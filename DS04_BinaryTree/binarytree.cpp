@@ -92,6 +92,16 @@ namespace BT
 		Visit(pNode);
 	}
 
+	int BinaryTree::GetSum(Node* pNode)
+	{
+		if (!pNode)
+		{
+			return 0;
+		}
+		
+		return GetSum(pNode->left) + GetSum(pNode->right) + pNode->val;
+	}
+
 	Node* BT::BinaryTree::CreateNode(int val)
 	{
 		return new Node{ val };
